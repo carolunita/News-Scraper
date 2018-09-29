@@ -1,0 +1,111 @@
+<div class="container-fluid">
+	<div class="row">
+		<!-- Sidebar Column -->
+		<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 sidebar">
+			<div class="row ml-auto mr-auto">
+				<h1 id="title">News Scraper</h1>
+			</div>
+			<div class="row">
+				<button class="standard add" id="addmnh"><img class="nav" id="mnh" src="assets/img/mnh-logo.png"></button>
+				<button class="standard add" id="addwsj"><img class="nav" id="wsj" src="assets/img/wsj-logo.png"></button>
+				<button class="standard add" id="addwp"><img class="nav" id="wp" src="assets/img/wp-logo.png"></button>
+				<a href="/"><button class="standard" id="showall">All articles</button></a>
+				<a href="/saved"><button class="standard save" id="saved">Saved articles</button></a>
+				<button class="standard delete" id="clear">Clear all</button> 
+			</div>
+		</div>
+
+		<div class="modal fade" id="added" tabindex="-1" role="dialog" aria-labelledby="added" aria-hidden="true">
+		  	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<h3 class="modal-title">Happy Reading!</h3>
+		        		<button type="button" class="close reload" data-dismiss="modal" aria-label="Close">
+		          			<span aria-hidden="true">&times;</span>
+		       		 	</button>
+		      		</div>
+
+			      	<div class="modal-body">
+			        	<p id="count"></p>
+			      	</div>
+
+			      	<div class="modal-footer">
+				        <a href="/"><button type="button" class="btn standard reload">Keep reading...</button></a>
+				    </div>
+		    	</div>
+		  	</div>
+		</div>
+
+		<div class="modal fade" id="notes" tabindex="-1" role="dialog" aria-labelledby="notes" aria-hidden="true">
+		  	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<h3 class="modal-title">Notes for this article...</h3>
+		        		<button type="button" class="close reload" data-dismiss="modal" aria-label="Close">
+		          			<span aria-hidden="true">&times;</span>
+		       		 	</button>
+		      		</div>
+
+			      	<div class="modal-body">
+			      		<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+				      		<form>
+								<div class="form-group row">
+									<label for="author" class="col-form-label col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">Author</label>
+									<div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+										<input class="form-control" type="text" id="author">
+									</div>
+								</div>
+								<div class="form-group row">
+								    <label for="author" class="col-form-label col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">Comment</label>
+								    <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+								    	<textarea class="form-control" id="body" rows="3"></textarea>
+									</div>
+								</div>
+							</form>
+
+							<div id="notecollection">
+								<div class="article">
+									<h2 class="heading">No notes yet</h2>
+									<p>Be the first to submit a note!</p>
+								</div>
+							</div>
+						</div>
+			      	</div>
+
+			      	<div class="modal-footer">
+				        <button type="button" class="btn modalclose reload">Close</button>
+				        <button type="button" class="btn standard reload" id="submit">Add a note!</button>
+				    </div>
+		    	</div>
+		  	</div>
+		</div>
+
+		<div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 main">
+			<!-- Articles -->
+			<div class="row articles"> 
+
+				{{#each news}}
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<div class="article">
+						<a href={{this.url}} target="_blank"><h2 class="heading">{{this.title}}</h2></a>
+						<p>{{this.brief}}</p>
+						<p><b>SOURCE:</b> <i>{{this.source}}</i></p>
+						<button class="standard save savearticle reload" data-id={{this._id}}>Save</button>
+						<button class="standard delete deletearticle reload" data-id={{this._id}}>Delete</button>
+						<button class="standard standard notes" data-id={{this._id}}>Notes</button>
+					</div>
+				</div>
+
+				{{else}}
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<div class="article">
+						<h2 class="heading">No articles yet!</h2>
+						<p>Select your source from the sidebar.</p>
+					</div>
+				</div>
+				{{/each}}
+
+			</div>
+		</div>
+	</div>
+</div>
